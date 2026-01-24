@@ -1,7 +1,7 @@
 export const vipStudents = [
   {
     id: 1,
-    name: "Ali",
+    name: "Syed Shah Ali",
     role: "Ethical hacker",
     image: "/images/students/ali.jpeg"
   },
