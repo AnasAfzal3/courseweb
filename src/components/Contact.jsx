@@ -68,7 +68,7 @@ const Contact = () => {
 
           {/* Map/Extra Info Section */}
           <div className="bg-gradient-to-br from-blue-600/10 to-purple-600/10 border border-gray-700 p-8 rounded-3xl h-full flex flex-col justify-center">
-            <h2 className="text-2xl font-bold mb-6">Why Choose Us?</h2>
+            <h2 className="text-2xl font-bold mb-6">Why Choose Us??</h2>
             <ul className="space-y-4 text-gray-300">
               <li className="flex items-center">
                 <div className="h-2 w-2 bg-blue-500 rounded-full mr-3"></div>
