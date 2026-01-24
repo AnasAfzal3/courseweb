@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@keyframes border-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-rgb-border {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+@keyframes border-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-rgb-border {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  border-radius: 1rem;
+  /* Glow Effect */
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); 
+    box-shadow: 0 0 10px 10px rgba(0, 242, 255, 0.4);
+  transition: box-shadow 0.3s ease;
+
+}
+
+.animate-rgb-border::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: #1a1a1a;
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 50% 50%;
+  background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+  /* High Brightness Colors for Shine */
+  background-image: linear-gradient(#00f2ff, #00f2ff), linear-gradient(#7000ff, #7000ff), linear-gradient(#ff0055, #ff0055), linear-gradient(#00ff88, #00ff88);
+  animation: border-rotate 3s linear infinite;
+  /* Ye line shine paida karegi */
+  filter: brightness(1.5) blur(1px);
+}
+
+/* Inner Overlay */
+.animate-rgb-border::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 3px; /* Border thickness */
+  top: 3px;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  background: #0a0a0a; /* Ultra Dark Background */
+  border-radius: 14px;
+     box-shadow: 0 0 20px 30px rgba(0, 242, 255, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+
+/* Hover par extra glow */
+.animate-rgb-border:hover {
+  box-shadow: 0 0 20px 30px rgba(0, 242, 255, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+
+/* Course Card ke liye special glow */
+.course-card-hover:hover {
+  box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.5); /* Blue glow */
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.image-overlay-gradient {
+  background: linear-gradient(to top, rgba(17, 24, 39, 0.9) 0%, rgba(17, 24, 39, 0) 100%);
+}
+
+@keyframes border-glow {
+  0% { border-color: rgba(75, 85, 99, 0.5); }
+  50% { border-color: rgba(59, 130, 246, 0.8); }
+  100% { border-color: rgba(75, 85, 99, 0.5); }
+}
+
+.premium-card {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.premium-card:hover {
+  box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.4);
+  animation: border-glow 2s infinite;
+}

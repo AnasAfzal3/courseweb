@@ -1,0 +1,41 @@
+@keyframes border-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-rgb-border {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Ye layer background mein rotate hogi */
+.animate-rgb-border::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: #1a1a1a;
+  background-repeat: no-repeat;
+  background-size: 50% 50%, 50% 50%;
+  background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+  /* RGB Colors yahan se change kar sakte hain */
+  background-image: linear-gradient(#3b82f6, #3b82f6), linear-gradient(#a855f7, #a855f7), linear-gradient(#ef4444, #ef4444), linear-gradient(#22c55e, #22c55e);
+  animation: border-rotate 4s linear infinite;
+}
+
+/* Ye inner box hai jo border ko patla dikhayega */
+.animate-rgb-border::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 2px; /* Border ki thickness yahan se set hogi */
+  top: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  background: #111827; /* Gray-900 (Box ka inner color) */
+  border-radius: 15px;
+}
