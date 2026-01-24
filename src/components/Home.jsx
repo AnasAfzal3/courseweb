@@ -16,7 +16,7 @@ const Home = () => {
           <Link to="/" className="flex items-center space-x-3 group">
            
             <span className="text-xl font-bold tracking-tight sm:inline-block text-gray-100">
-             <img src='images/Logo.png' width={70} alt='not found'/>
+             <img src='images/logo.png' width={70} alt='not found'/>
             </span>
           </Link>
 
