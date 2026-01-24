@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Clock, BookOpen, Star, CheckCircle } from 'lucide-react';
+import {  BookOpen, Star, CheckCircle } from 'lucide-react';
 import { courses } from '../data';
 import EnrollmentModal from './EnrollmentModal'
 import { useState } from 'react';

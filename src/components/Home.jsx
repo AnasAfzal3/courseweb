@@ -16,15 +16,15 @@ const Home = () => {
           <Link to="/" className="flex items-center space-x-3 group">
            
             <span className="text-xl font-bold tracking-tight sm:inline-block text-gray-100">
-             <img src='../images/Logo.png' width={70}/>
+             <img src='../images/Logo.png' width={70} alt='not found'/>
             </span>
           </Link>
 
           {/* Navigation */}
           <nav className="flex space-x-6 text-sm font-medium text-gray-400">
             <Link to="/" className="hover:text-white transition">Home</Link>
-            <a href="#courses" className="hover:text-white transition">Courses</a>
-            <a href="#" className="hover:text-white transition">Contact</a>
+            <Link to="#courses" className="hover:text-white transition">Courses</Link>
+            <Link to="#" className="hover:text-white transition">Contact</Link>
           </nav>
         </div>
       </header>
