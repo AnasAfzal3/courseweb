@@ -28,7 +28,7 @@ const EnrollmentModal = ({ isOpen, onClose, selectedCourse }) => {
       body: new FormData(form),
     });
 
-    alert("Shukriya! Aapka admission form jama ho gaya hai.");
+    alert("Shukriya! Aapka admission form jama ho gaya hai. jald apko contact kiya jayga");
     onClose();
     form.reset();
 
