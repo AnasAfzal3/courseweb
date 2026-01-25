@@ -45,6 +45,7 @@ const Home = () => {
                         ) : (
                             <Link to="/login">Login</Link>
                         )}
+                        <Link to="/cverify" className="hover:text-white transition">Certificate validator</Link>
                     </nav>
                 </div>
             </header>

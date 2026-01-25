@@ -9,6 +9,7 @@ import Contact from './components/Contact';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard';
+import Verify from './components/Verify';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/course/:id" element={<CourseDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cverify" element={<Verify />} />
 
         {/* Protected Routes (Ab ye Routes ke andar hai) */}
         <Route 
