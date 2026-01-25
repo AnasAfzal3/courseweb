@@ -125,7 +125,7 @@ const Home = () => {
                     <div className="flex items-center space-x-4">
                         <p className="text-gray-400 text-sm font-medium">Follow us:</p>
                         <a
-                            href="https://facebook.com"
+                            href="https://www.facebook.com/learnwithanasmemon"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-blue-600/10 p-2 rounded-full text-blue-500 hover:bg-blue-600 hover:text-white transition-all shadow-lg"
