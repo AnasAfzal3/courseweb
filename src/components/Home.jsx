@@ -44,7 +44,7 @@ const Home = () => {
                                 <button onClick={() => auth.signOut()}><LogOut size={18} /></button>
                             </div>
                         ) : (
-                            <Link to="/login">Logins</Link>
+                            <Link to="/login">Login</Link>
                         )}
                         <Link to="/cverify" className="hover:text-white transition">Certificate validator</Link>
                     </nav>
