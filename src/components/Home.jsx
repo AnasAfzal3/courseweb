@@ -8,6 +8,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import {  LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { auth } from '../firebase';
+
 const Home = () => {
     const [user, setUser] = useState(null);
 

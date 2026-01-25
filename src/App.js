@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import CourseViewer from './components/CourseViewer'; // Naya component
 // Components
 import Home from './components/Home';
 import CourseDetail from './components/CourseDetail';
@@ -21,6 +21,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cverify" element={<Verify />} />
+        <Route path="/course-viewer/:courseId" element={<CourseViewer />} />
 
         {/* Protected Routes (Ab ye Routes ke andar hai) */}
         <Route 

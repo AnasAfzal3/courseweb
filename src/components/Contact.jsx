@@ -60,7 +60,7 @@ const Contact = () => {
                 </div>
                 <div className="ml-6">
                   <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">{item.title}</h3>
-                  <p className="text-lg font-semibold text-gray-200">{item.value}</p>
+                  <p className="text-sm font-semibold text-gray-200">{item.value}</p>
                 </div>
               </a>
             ))}
