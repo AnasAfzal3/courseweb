@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPTE Ethical Hacking | Anas Memon</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #03060a;
+            --bg-card: #09111e;
+            --accent-cyan: #00f2fe;
+            --accent-blue: #0077ff;
+            --accent-red: #ff2a2a;
+            /* STRICT WHITE TEXT FIX */
+            --text-main: #ffffff;
+            --text-muted: #ffffff; 
+            --border-color: rgba(0, 242, 254, 0.25);
+            --font-sans: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        /* Custom Cursor */
+        * {
+            cursor: none !important;
+        }
+
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-red);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px var(--accent-red);
+        }
+
+        #cursor-outline {
+            width: 35px;
+            height: 35px;
+            border: 2px solid rgba(255, 42, 42, 0.8);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 99998;
+            transform: translate(-50%, -50%);
+            transition: width 0.15s, height 0.15s, border-color 0.15s;
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #020305;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loader-title {
+            font-family: var(--font-code);
+            color: var(--accent-cyan);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .loader-counter {
+            font-family: var(--font-code);
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .loader-bar-bg {
+            width: 280px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-cyan));
+            box-shadow: 0 0 10px var(--accent-cyan);
+            transition: width 0.1s linear;
+        }
+
+        /* Dark High-Contrast Background */
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff !important;
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.1) 0%, transparent 60%),
+                linear-gradient(rgba(0, 242, 254, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 254, 0.04) 1px, transparent 1px);
+            background-size: 100% 100%, 35px 35px, 35px 35px;
+            background-attachment: fixed;
+        }
+
+        p, span, li, h1, h2, h3, h4, h5, h6, div {
+            color: #ffffff;
+        }
+
+        /* Glass Navbar */
+        .navbar {
+            background: rgba(3, 6, 10, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+        }
+
+        .navbar-brand img {
+            max-height: 50px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-cyan) !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 140px 0 80px 0;
+            position: relative;
+        }
+
+        .badge-cyber {
+            background: rgba(0, 242, 254, 0.12);
+            color: var(--accent-cyan) !important;
+            border: 1px solid rgba(0, 242, 254, 0.4);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-family: var(--font-code);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--accent-cyan), #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            color: #ffffff;
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* Instructor Card */
+        .instructor-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 30px rgba(0, 242, 254, 0.2);
+        }
+
+        .instructor-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .instructor-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .instructor-info {
+            padding: 20px 24px;
+            background: rgba(9, 17, 30, 0.95);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Buttons */
+        .btn-glow {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000000 !important;
+            font-weight: 800;
+            padding: 14px 32px;
+            border-radius: 10px;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0, 242, 254, 0.5);
+            color: #000000 !important;
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--border-color);
+            color: #ffffff !important;
+            background: rgba(255,255,255,0.05);
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline-custom:hover {
+            background: rgba(0, 242, 254, 0.15);
+            color: var(--accent-cyan) !important;
+            border-color: var(--accent-cyan);
+        }
+
+        /* Kali Linux Laptop & Job Path Section */
+        .kali-section {
+            padding: 100px 0;
+            background: rgba(9, 17, 30, 0.85);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Kali Dragon Background Watermark Overlay */
+        .kali-dragon-bg {
+            position: absolute;
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 500px;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .laptop-wrapper {
+            position: relative;
+            border: 12px solid #1e293b;
+            border-radius: 20px 20px 0 0;
+            background: #000;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 242, 254, 0.25);
+            z-index: 1;
+        }
+
+        .laptop-screen {
+            background: #04070d;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            min-height: 340px;
+            font-family: var(--font-code);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .laptop-base {
+            height: 16px;
+            background: #334155;
+            border-radius: 0 0 20px 20px;
+            width: 108%;
+            margin-left: -4%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .path-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .path-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 242, 254, 0.12);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan) !important;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+        }
+
+        .price-card.featured {
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.25);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -14px;
+            right: 25px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000000 !important;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 4px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 20px 0;
+            color: #ffffff;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .feature-list li {
+            color: #ffffff !important;
+            margin-bottom: 15px;
+            font-size: 0.98rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li i {
+            color: var(--accent-cyan) !important;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            background: #020305;
+            padding: 40px 0;
+            color: #ffffff !important;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Red Cyber Cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-title">&gt; INITIALIZING AM CYBER FRAMEWORK...</div>
+        <div class="loader-counter" id="loader-percentage">0%</div>
+        <div class="loader-bar-bg">
+            <div class="loader-bar-fill" id="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="am.jpg" alt="AM Learn With Anas Memon Logo">
+            </a>
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kalipath">Kali Roadmap</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#instructor">Instructor</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing Plans</a></li>
+                </ul>
+                <a href="#pricing" class="btn-glow ms-3 btn-sm text-center">Enroll Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="overview">
+        <div class="container">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-7">
+                    <div class="badge-cyber">
+                        <i class="fa-solid fa-terminal"></i> AM CYBER LABS ONLINE
+                    </div>
+                    <h1 class="hero-title">Become a Certified <span>Ethical Hacker</span> & PenTester.</h1>
+                    <p class="hero-desc">
+                        Master real-world offensive security, Kali Linux exploitation tools, and network defense with industry-grade labs under direct mentorship.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#pricing" class="btn-glow">Explore Courses</a>
+                        <a href="#kalipath" class="btn-outline-custom">View Kali Linux Path</a>
+                    </div>
+                </div>
+
+                <!-- Instructor Card -->
+                <div class="col-lg-5" id="instructor">
+                    <div class="instructor-card">
+                        <div class="instructor-img-wrapper">
+                            <img src="anas1.jfif" alt="Anas Memon - Lead Instructor">
+                        </div>
+                        <div class="instructor-info">
+                            <h4 class="mb-1 fw-bold text-white">Anas Memon</h4>
+                            <p class="text-white mb-0 small">Lead Cybersecurity Trainer & Consultant</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kali Linux Laptop & Dragon Section -->
+    <section class="kali-section" id="kalipath">
+        <!-- Official Kali Linux Dragon Watermark SVG -->
+        <img src="https://www.kali.org/images/kali-dragon-icon.svg" class="kali-dragon-bg" alt="Kali Linux Dragon Watermark">
+
+        <div class="container">
+            <div class="row align-items-center gy-5">
+                <!-- Laptop Mockup with Kali Linux Terminal & Dragon Banner -->
+                <div class="col-lg-6">
+                    <div class="laptop-wrapper">
+                        <div class="laptop-screen">
+                            <div class="terminal-header">
+                                <div class="terminal-dot dot-red"></div>
+                                <div class="terminal-dot dot-yellow"></div>
+                                <div class="terminal-dot dot-green"></div>
+                                <span class="ms-2 small text-white">kali@anas-memon: ~ (Kali OS 2026)</span>
+                            </div>
+                            <!-- Kali Linux Dragon ASCII/Header -->
+                            <p style="color: var(--accent-cyan); font-size: 0.75rem; margin-bottom: 10px; line-height: 1.2;">
+                                 ..............<br>
+                                 ............,,...,.<br>
+                                 ...... KALI LINUX DRAGON OS .....<br>
+                            </p>
+                            <p style="color: var(--accent-cyan); margin-bottom: 5px;">┌──(kali㉿anas-memon)-[~]</p>
+                            <p style="color: #ffffff; margin-bottom: 15px;">└─$ sudo nmap -sS -sV -O 192.168.1.1</p>
+                            <p class="text-white small mb-1">[+] Starting Nmap 7.94 scan...</p>
+                            <p class="text-white small mb-1">[+] PORT 80/tcp OPEN (http - Apache)</p>
+                            <p class="text-white small mb-1">[+] PORT 443/tcp OPEN (ssl/https)</p>
+                            <p class="text-white small mb-3">[+] OS: Linux 6.x / Official Kali Dragon OS Detected</p>
+                            <p style="color: var(--accent-cyan); margin-bottom: 5px;">┌──(kali㉿anas-memon)-[~]</p>
+                            <p style="color: #ffffff; margin-bottom: 0;">└─$ msfconsole -q</p>
+                        </div>
+                    </div>
+                    <div class="laptop-base"></div>
+                </div>
+
+                <!-- Job Path Details -->
+                <div class="col-lg-6">
+                    <div class="ps-lg-4">
+                        <div class="badge-cyber mb-3">
+                            <!-- Dragon Icon -->
+                            <i class="fa-solid fa-dragon"></i> KALI LINUX DRAGON CAREER PATHWAY
+                        </div>
+                        <h2 class="h1 fw-bold text-white mb-4">Hands-On Offensive Security Career Path</h2>
+                        
+                        <div class="path-step">
+                            <div class="path-icon"><i class="fa-solid fa-dragon"></i></div>
+                            <div>
+                                <h5 class="fw-bold text-white mb-1">1. Master Kali Linux OS Environment</h5>
+                                <p class="text-white small mb-0">Learn terminal commands, bash scripting, permission handling, and environment setup for advanced penetration testing.</p>
+                            </div>
+                        </div>
+
+                        <div class="path-step">
+                            <div class="path-icon"><i class="fa-solid fa-bug"></i></div>
+                            <div>
+                                <h5 class="fw-bold text-white mb-1">2. Network & Web Penetration</h5>
+                                <p class="text-white small mb-0">Utilize Nmap, Metasploit, Burp Suite, and OWASP vulnerabilities on live target machines.</p>
+                            </div>
+                        </div>
+
+                        <div class="path-step">
+                            <div class="path-icon"><i class="fa-solid fa-briefcase"></i></div>
+                            <div>
+                                <h5 class="fw-bold text-white mb-1">3. Job & Freelance Placement</h5>
+                                <p class="text-white small mb-0">Prepare for roles like SOC Analyst, Junior Pentester, Bug Bounty Hunter, and Cyber Consultant.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="h1 fw-bold text-white mb-3">Transparent Course Pricing</h2>
+                <p class="text-white">Select the track that matches your learning goals and career objectives.</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <!-- Basic Track -->
+                <div class="col-lg-5 col-md-6">
+                    <div class="price-card">
+                        <div>
+                            <h3 class="h4 fw-bold text-white">Basic Track</h3>
+                            <p class="text-white small">Essential cybersecurity foundations for beginners.</p>
+                            <div class="price-amount">
+                                15,000 <span class="fs-6 text-white">PKR</span>
+                            </div>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check"></i> Fundamentals of Networking & OS</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Basic Information Gathering & OSINT</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Introductory Web Security Concepts</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Certificate of Completion</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn-outline-custom w-100 text-center">Get Started</a>
+                    </div>
+                </div>
+
+                <!-- Advance Track -->
+                <div class="col-lg-5 col-md-6">
+                    <div class="price-card featured">
+                        <div class="featured-badge">Most Popular</div>
+                        <div>
+                            <h3 class="h4 fw-bold text-white">CPTE Advance Track</h3>
+                            <p class="text-white small">Comprehensive hands-on penetration testing training.</p>
+                            <div class="price-amount">
+                                25,000 <span class="fs-6 text-white">PKR</span>
+                            </div>
+                            <ul class="feature-list">
+                                <li><i class="fa-solid fa-circle-check"></i> Advanced Network & Web Pentesting</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Exploitation & Privilege Escalation</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Active Directory Attacks</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Real-World Practical Lab Access</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Direct 1-on-1 Mentorship & Career Guidance</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn-glow w-100 text-center">Enroll in CPTE Advance</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-0 text-white">© 2026 AM Institute | Learn With Anas Memon. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script>
+        // Red Cursor Tracking
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            dot.style.left = `${posX}px`;
+            dot.style.top = `${posY}px`;
+
+            outline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 300, fill: "forwards" });
+        });
+
+        // Preloader Logic
+        let count = 0;
+        const counterEl = document.getElementById('loader-percentage');
+        const barEl = document.getElementById('loader-bar');
+        const preloader = document.getElementById('preloader');
+
+        const interval = setInterval(() => {
+            count += Math.floor(Math.random() * 8) + 2;
+            if (count > 100) count = 100;
+
+            counterEl.innerText = count + '%';
+            barEl.style.width = count + '%';
+
+            if (count === 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden';
+                }, 400);
+            }
+        }, 30);
+    </script>
+</body>
+</html>
