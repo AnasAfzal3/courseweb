@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Python Course | Learn With Anas Memon</title>
+
+    <meta name="description"
+          content="Learn Python with Anas Memon. Join recorded Python course or live training classes.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #080808;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =========================
+           VARIABLES
+        ========================== */
+
+        :root {
+            --orange: #ff7a00;
+            --orange-light: #ff9d2e;
+            --orange-dark: #c94f00;
+            --black: #080808;
+            --dark: #101010;
+            --card: #111111;
+            --border: rgba(255, 122, 0, 0.45);
+            --white: #ffffff;
+            --muted: #b8b8b8;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================== */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(
+                    circle at 80% 10%,
+                    rgba(255, 122, 0, 0.18),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 10% 80%,
+                    rgba(255, 122, 0, 0.10),
+                    transparent 25%
+                );
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .25;
+            background-image:
+                radial-gradient(#ff7a00 1px, transparent 1px);
+            background-size: 35px 35px;
+            mask-image: linear-gradient(
+                to bottom,
+                black,
+                transparent 70%
+            );
+            z-index: -1;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 50;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 25px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
+        }
+
+        .brand-text strong {
+            display: block;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .brand-text span {
+            display: block;
+            color: #aaa;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        .nav-button {
+            padding: 11px 20px;
+            border: 1px solid var(--orange);
+            border-radius: 50px;
+            color: var(--orange-light);
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: .3s;
+        }
+
+        .nav-button:hover {
+            background: var(--orange);
+            color: #000;
+            box-shadow: 0 0 25px rgba(255, 122, 0, .45);
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 820px;
+            position: relative;
+
+            max-width: 1250px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+
+            padding: 130px 30px 80px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+        }
+
+        .small-title {
+            color: var(--orange-light);
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(65px, 9vw, 125px);
+            line-height: .85;
+            font-weight: 900;
+            letter-spacing: -5px;
+
+            background: linear-gradient(
+                135deg,
+                #fff 15%,
+                #ff9d2e 55%,
+                #ff6500
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h2 {
+            font-size: clamp(24px, 3vw, 42px);
+            margin-top: 25px;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            max-width: 540px;
+            margin-top: 25px;
+
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .orange {
+            color: var(--orange);
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn {
+            padding: 15px 25px;
+            border-radius: 8px;
+
+            background: linear-gradient(
+                135deg,
+                #ff9d2e,
+                #ff6200
+            );
+
+            color: #000;
+            font-size: 14px;
+            font-weight: 800;
+
+            transition: .3s;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(255, 122, 0, .35);
+        }
+
+        .outline-btn {
+            padding: 15px 25px;
+            border: 1px solid #444;
+            border-radius: 8px;
+
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: .3s;
+        }
+
+        .outline-btn:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+
+        /* =========================
+           INSTRUCTOR IMAGE
+        ========================== */
+
+        /* =========================
+   INSTRUCTOR IMAGE & GLOW EFFECT
+========================== */
+
+.hero-image {
+    position: relative;
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    isolation: isolate;
+    overflow: visible;
+}
+
+/* Bright Orange Floor Glow */
+.hero-image::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: 20px;
+    width: min(520px, 90%);
+    height: 140px;
+    transform: translateX(-50%);
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255, 140, 0, 1) 0%,
+        rgba(255, 100, 0, 0.7) 30%,
+        rgba(255, 75, 0, 0.3) 60%,
+        transparent 80%
+    );
+    filter: blur(15px);
+    opacity: 0.95;
+    pointer-events: none;
+    animation: floorPulse 3s ease-in-out infinite;
+}
+
+/* Outer Glowing Portal Ring */
+.hero-image .floor-ring {
+    position: absolute;
+    left: 50%;
+    bottom: 25px;
+    width: min(480px, 85%);
+    height: 65px;
+    transform: translateX(-50%);
+    border: 3px solid rgba(255, 180, 50, 0.95);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 20px rgba(255, 140, 0, 0.9),
+        0 0 45px rgba(255, 100, 0, 0.7),
+        inset 0 0 25px rgba(255, 140, 0, 0.5);
+    pointer-events: none;
+    animation: floorPulse 3s ease-in-out infinite;
+}
+
+/* Inner Ring Sparkle */
+/* .hero-image .floor-ring::before {
+    content: "";
+    position: absolute;
+    inset: 4px 6%;
+    border-radius: 50%;
+    border-top: 2px solid rgba(255, 240, 200, 0.9);
+    filter: blur(1px);
+} */
+
+/* Background Soft Glow behind Head */
+.hero-image::before {
+    content: "";
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 122, 0, 0.45) 0%,
+        rgba(255, 122, 0, 0.1) 50%,
+        transparent 75%
+    );
+    filter: blur(25px);
+    z-index: 999;
+}
+
+/* Instructor Photo Positioning */
+.instructor {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 25px; /* Ring ke hisab se adjust karne ke liye */
+    width: auto;
+    max-width: 100%;
+    height: 580px;
+    object-fit: contain;
+    object-position: bottom;
+    
+    /* NEECHE SE CURVE KARNE KE LIYE CLIP-PATH */
+    
+
+
+    filter:
+        drop-shadow(0 15px 25px rgba(0,0,0,0.8))
+        drop-shadow(0 0 20px rgba(255, 122, 0, 0.3));
+}
+        @keyframes floorPulse {
+            0%, 100% {
+                opacity: .72;
+                transform: translateX(-50%) scaleX(.96);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) scaleX(1.02);
+            }
+        }
+
+        .hero-image::after {
+            animation: floorPulse 3.2s ease-in-out infinite;
+        }
+
+        .hero-image .floor-ring {
+            animation: floorPulse 3.2s ease-in-out infinite;
+        }
+
+        .python-watermark {
+            position: absolute;
+
+            font-size: 220px;
+            font-weight: 900;
+
+            color: rgba(255, 122, 0, .08);
+
+            right: 10px;
+            top: 70px;
+
+            transform: rotate(-10deg);
+        }
+
+        .instructor {
+            position: relative;
+            z-index: 999;
+            
+            width: min(520px, 100%);
+            height: 610px;
+
+            object-fit: contain;
+            object-position: bottom;
+
+            filter:
+                drop-shadow(0 20px 35px rgba(0,0,0,.75))
+                drop-shadow(0 0 28px rgba(255,122,0,.25))
+                drop-shadow(0 8px 8px rgba(255,120,0,.16));
+        }
+
+        /* =========================
+           SECTION
+        ========================== */
+
+        .section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 25px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-heading span {
+            color: var(--orange);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(32px, 5vw, 55px);
+            margin-top: 12px;
+        }
+
+        .section-heading p {
+            color: #999;
+            margin-top: 15px;
+        }
+
+        /* =========================
+           COURSE CARDS
+        ========================== */
+
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .course-card {
+            position: relative;
+
+            padding: 40px 35px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.055),
+                    rgba(255,255,255,.015)
+                );
+
+            border: 1px solid rgba(255,122,0,.3);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            transition: .35s;
+        }
+
+        .course-card::before {
+            content: "";
+
+            position: absolute;
+            width: 200px;
+            height: 200px;
+
+            right: -80px;
+            top: -80px;
+
+            background: var(--orange);
+
+            filter: blur(100px);
+            opacity: .12;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+
+            border-color: var(--orange);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,.5),
+                0 0 35px rgba(255,122,0,.12);
+        }
+
+        .card-icon {
+            width: 58px;
+            height: 58px;
+
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255,122,0,.12);
+            border: 1px solid var(--border);
+
+            color: var(--orange);
+            font-size: 26px;
+
+            margin-bottom: 25px;
+        }
+
+        .course-card h3 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .course-card .subtitle {
+            color: var(--orange-light);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .features {
+            list-style: none;
+            margin: 28px 0;
+        }
+
+        .features li {
+            display: flex;
+            gap: 10px;
+
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.5;
+
+            padding: 8px 0;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: var(--orange);
+            font-weight: 900;
+        }
+
+        .price-box {
+            margin-top: 25px;
+            padding: 20px;
+
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #ff8a00,
+                #ff5c00
+            );
+
+            color: #000;
+
+            text-align: center;
+        }
+
+        .price-box small {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .price {
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1;
+            margin-top: 5px;
+        }
+
+        .price span {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .course-btn {
+            width: 100%;
+
+            margin-top: 15px;
+            padding: 15px;
+
+            border-radius: 9px;
+
+            background: transparent;
+            border: 1px solid var(--orange);
+
+            color: #fff;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            display: block;
+            text-align: center;
+
+            transition: .3s;
+        }
+
+        .course-btn:hover {
+            background: var(--orange);
+            color: #000;
+        }
+
+        /* =========================
+           PYTHON BENEFITS
+        ========================== */
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .benefit {
+            padding: 30px;
+            background: #0f0f0f;
+            border: 1px solid #222;
+            border-radius: 15px;
+        }
+
+        .benefit-number {
+            font-size: 13px;
+            color: var(--orange);
+            font-weight: 800;
+        }
+
+        .benefit h3 {
+            margin: 12px 0;
+            font-size: 20px;
+        }
+
+        .benefit p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .cta {
+            max-width: 1100px;
+            margin: 50px auto 100px;
+
+            padding: 65px 30px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,122,0,.2),
+                    rgba(255,122,0,.04)
+                );
+
+            border: 1px solid rgba(255,122,0,.35);
+        }
+
+        .cta h2 {
+            font-size: clamp(30px, 5vw, 55px);
+        }
+
+        .cta p {
+            color: #aaa;
+            margin: 15px 0 30px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            border-top: 1px solid #222;
+            padding: 30px 20px;
+
+            text-align: center;
+
+            color: #777;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: var(--orange);
+        }
+
+
+        /* =========================
+           STYLISH CUSTOM CURSOR
+        ========================== */
+
+        body,
+        a,
+        button {
+            cursor: none;
+        }
+
+        .cursor-dot,
+        .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #ff8a00;
+            box-shadow:
+                0 0 8px #ff8a00,
+                0 0 18px rgba(255, 122, 0, .8);
+        }
+
+        .cursor-ring {
+            width: 34px;
+            height: 34px;
+            border: 1px solid rgba(255, 143, 45, .85);
+            border-radius: 50%;
+            transition:
+                width .18s ease,
+                height .18s ease,
+                border-color .18s ease,
+                background .18s ease,
+                box-shadow .18s ease;
+        }
+
+        .cursor-ring::before,
+        .cursor-ring::after {
+            content: "";
+            position: absolute;
+            background: rgba(255, 145, 50, .8);
+        }
+
+        .cursor-ring::before {
+            width: 1px;
+            height: 7px;
+            left: 50%;
+            top: -5px;
+            transform: translateX(-50%);
+        }
+
+        .cursor-ring::after {
+            width: 7px;
+            height: 1px;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .cursor-ring.hover {
+            width: 52px;
+            height: 52px;
+            border-color: #ff9d2e;
+            background: rgba(255, 122, 0, .07);
+            box-shadow:
+                0 0 14px rgba(255, 122, 0, .35),
+                inset 0 0 12px rgba(255, 122, 0, .10);
+        }
+
+        @media (max-width: 850px), (pointer: coarse) {
+            body,
+            a,
+            button {
+                cursor: auto;
+            }
+
+            .cursor-dot,
+            .cursor-ring {
+                display: none;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 850px) {
+
+            .nav-button {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 130px;
+                text-align: center;
+            }
+
+            .hero-content {
+                order: 1;
+            }
+
+            .hero-image {
+                order: 2;
+                height: 520px;
+                margin-top: 30px;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .instructor {
+                height: 500px;
+            }
+
+            .courses {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .nav {
+                padding: 18px;
+            }
+
+            .brand-logo {
+                width: 48px;
+                height: 48px;
+            }
+
+            .hero {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero h1 {
+                font-size: 64px;
+                letter-spacing: -3px;
+            }
+
+            .hero h2 {
+                font-size: 25px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .hero-image {
+                height: 430px;
+            }
+
+            .instructor {
+                height: 430px;
+            }
+
+            .course-card {
+                padding: 28px 22px;
+            }
+
+            .price {
+                font-size: 35px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="nav">
+
+        <a href="#" class="brand">
+
+            <!-- CHANGE THIS TO YOUR LOGO FILE -->
+            <img
+                src="./am.jpg"
+                alt="AM Learn With Anas Memon"
+                class="brand-logo"
+            >
+
+            <div class="brand-text">
+                <strong>AM</strong>
+                <span>LEARN WITH ANAS MEMON</span>
+            </div>
+
+        </a>
+
+        <a
+            class="nav-button"
+            href="https://wa.me/923220274707?text=Hello%20Anas%20Memon%2C%20I%20want%20to%20join%20the%20Python%20course."
+            target="_blank"
+        >
+            WHATSAPP NOW
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="small-title">
+            AM INSTITUTE • PYTHON TRAINING
+        </div>
+
+        <h1>PYTHON</h1>
+
+        <h2>
+            Learn. <span class="orange">Build.</span> Grow.
+        </h2>
+
+        <p class="hero-description">
+            Start your Python journey with structured learning,
+            practical programming concepts and real-world projects
+            under the guidance of <strong>Anas Memon</strong>.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="#courses"
+                class="primary-btn"
+            >
+                EXPLORE COURSES
+            </a>
+
+            <a
+                href="https://wa.me/923220274707?text=Hello%20Anas%20Memon%2C%20I%20want%20information%20about%20the%20Python%20course."
+                target="_blank"
+                class="outline-btn"
+            >
+                CONTACT ON WHATSAPP
+            </a>
+
+        </div>
+
+    </div>
+
+
+   <div class="hero-image">
+    <div class="python-watermark">PY</div>
+    <div class="floor-ring" aria-hidden="true"></div>
+
+    <div class="instructor-wrapper">
+        <img
+            src="./anas-python2.png"
+            alt="Anas Memon Python Instructor"
+            class="instructor"
+        >
+    </div>
+</div>
+
+</section>
+
+
+<!-- =========================
+     COURSES
+========================= -->
+
+<section class="section" id="courses">
+
+    <div class="section-heading">
+
+        <span>CHOOSE YOUR LEARNING STYLE</span>
+
+        <h2>Python Courses</h2>
+
+        <p>
+            Learn at your own pace or join live training sessions.
+        </p>
+
+    </div>
+
+
+    <div class="courses">
+
+
+        <!-- =====================
+             RECORDED COURSE
+        ====================== -->
+
+        <div class="course-card">
+
+            <div class="card-icon">
+                ▶
+            </div>
+
+            <h3>
+                Buy Recorded Course
+            </h3>
+
+            <div class="subtitle">
+                Learn at your own pace
+            </div>
+
+            <ul class="features">
+
+                <li>
+                    Complete Python learning program
+                </li>
+
+                <li>
+                    Pre-recorded video lectures
+                </li>
+
+                <li>
+                    Learn anytime, anywhere
+                </li>
+
+                <li>
+                    Practical programming exercises
+                </li>
+
+                <li>
+                    Project-based learning
+                </li>
+
+                <li>
+                    WhatsApp support
+                </li>
+
+            </ul>
+
+
+            <div class="price-box">
+
+                <small>ONE TIME PAYMENT</small>
+
+                <div class="price">
+                    PKR 2,000
+                </div>
+
+            </div>
+
+
+            <a
+                href="https://wa.me/923220274707?text=Hello%20Anas%20Memon%2C%20I%20want%20to%20buy%20the%20Recorded%20Python%20Course%20for%20PKR%202%2C000."
+                target="_blank"
+                class="course-btn"
+            >
+                BUY RECORDED COURSE →
+            </a>
+
+        </div>
+
+
+
+        <!-- =====================
+             LIVE COURSE
+        ====================== -->
+
+        <div class="course-card">
+
+            <div class="card-icon">
+                ◉
+            </div>
+
+            <h3>
+                Live Training Classes
+            </h3>
+
+            <div class="subtitle">
+                Learn live with Anas Memon
+            </div>
+
+            <ul class="features">
+
+                <li>
+                    Live Python classes
+                </li>
+
+                <li>
+                    Direct interaction with instructor
+                </li>
+
+                <li>
+                    Real-time doubt clearing
+                </li>
+
+                <li>
+                    Practical coding exercises
+                </li>
+
+                <li>
+                    Projects and assignments
+                </li>
+
+                <li>
+                    WhatsApp support
+                </li>
+
+            </ul>
+
+
+            <div class="price-box">
+
+                <small>MONTHLY FEE</small>
+
+                <div class="price">
+                    PKR 5,000
+                    <span>/ MONTH</span>
+                </div>
+
+            </div>
+
+
+            <a
+                href="https://wa.me/923220274707?text=Hello%20Anas%20Memon%2C%20I%20want%20to%20join%20the%20Live%20Python%20Training%20Classes%20for%20PKR%205%2C000%20per%20month."
+                target="_blank"
+                class="course-btn"
+            >
+                JOIN LIVE CLASSES →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     WHAT YOU WILL LEARN
+========================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <span>PYTHON LEARNING PATH</span>
+
+        <h2>What You'll Learn</h2>
+
+    </div>
+
+
+    <div class="benefits">
+
+        <div class="benefit">
+
+            <div class="benefit-number">
+                01
+            </div>
+
+            <h3>Python Fundamentals</h3>
+
+            <p>
+                Understand Python syntax, variables, data types,
+                conditions, loops and functions.
+            </p>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-number">
+                02
+            </div>
+
+            <h3>Practical Programming</h3>
+
+            <p>
+                Build your programming skills through practical
+                exercises and hands-on projects.
+            </p>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-number">
+                03
+            </div>
+
+            <h3>Real Projects</h3>
+
+            <p>
+                Apply your Python knowledge by creating useful
+                projects and improving your problem-solving skills.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="cta">
+
+    <h2>
+        Ready to Learn <span class="orange">Python?</span>
+    </h2>
+
+    <p>
+        Choose recorded learning or join our live training classes.
+    </p>
+
+    <a
+        href="https://wa.me/923220274707?text=Hello%20Anas%20Memon%2C%20I%20want%20to%20start%20learning%20Python."
+        target="_blank"
+        class="primary-btn"
+    >
+        START LEARNING ON WHATSAPP →
+    </a>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © 2026
+    <strong>AM Institute</strong>
+    — Learn With Anas Memon.
+    All Rights Reserved.
+
+</footer>
+
+
+
+    <!-- Stylish cursor -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+
+    <script>
+        (() => {
+            const dot = document.querySelector(".cursor-dot");
+            const ring = document.querySelector(".cursor-ring");
+
+            if (!dot || !ring || window.matchMedia("(pointer: coarse)").matches) return;
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+                dot.style.left = mouseX + "px";
+                dot.style.top = mouseY + "px";
+            });
+
+            const animate = () => {
+                ringX += (mouseX - ringX) * 0.16;
+                ringY += (mouseY - ringY) * 0.16;
+
+                ring.style.left = ringX + "px";
+                ring.style.top = ringY + "px";
+
+                requestAnimationFrame(animate);
+            };
+
+            animate();
+
+            document.querySelectorAll("a, button, .course-card").forEach((el) => {
+                el.addEventListener("mouseenter", () => ring.classList.add("hover"));
+                el.addEventListener("mouseleave", () => ring.classList.remove("hover"));
+            });
+        })();
+    </script>
+
+</body>
+</html>
